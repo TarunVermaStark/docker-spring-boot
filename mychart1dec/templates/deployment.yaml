@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "mychart1DEC.fullname" . }}
+  name: {{ include "mychart1dec.fullname" . }}
   labels:
-    {{- include "mychart1DEC.labels" . | nindent 4 }}
+    {{- include "mychart1dec.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "mychart1DEC.selectorLabels" . | nindent 6 }}
+      {{- include "mychart1dec.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "mychart1DEC.labels" . | nindent 8 }}
+        {{- include "mychart1dec.labels" . | nindent 8 }}
 	{{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "mychart1DEC.serviceAccountName" . }}
+      serviceAccountName: {{ include "mychart1dec.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
